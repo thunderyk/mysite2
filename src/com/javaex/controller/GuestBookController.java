@@ -22,10 +22,10 @@ public class GuestBookController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String action = request.getParameter("action");
+		GuestBookDao guestBookDao = new GuestBookDao();
 		
 		if("addList".equals(action)) {
 			
-			GuestBookDao guestBookDao = new GuestBookDao();
 			List<GuestBookVo>guestBookList = guestBookDao.getGuestBookList();
 			request.setAttribute("guestBookList", guestBookList);
 			
@@ -35,7 +35,6 @@ public class GuestBookController extends HttpServlet {
 			String password = request.getParameter("pass");
 			String content = request.getParameter("content");
 			
-			GuestBookDao guestBookDao = new GuestBookDao();
 			GuestBookVo guestBookVo = new GuestBookVo(name,password,content);
 			guestBookDao.guestInsert(guestBookVo);
 			
@@ -43,7 +42,6 @@ public class GuestBookController extends HttpServlet {
 		}else if("deleteForm".equals(action)) {
 			int deleteNum = Integer.parseInt(request.getParameter("no"));
 			
-			GuestBookDao guestBookDao = new GuestBookDao();
 			GuestBookVo guestBookVo = guestBookDao.getGuestBook(deleteNum);
 			
 			request.setAttribute("guestBookVo", guestBookVo);
@@ -52,7 +50,7 @@ public class GuestBookController extends HttpServlet {
 			
 			String password = request.getParameter("pass");
 			int deleteNum = Integer.parseInt(request.getParameter("no"));
-			GuestBookDao guestBookDao = new GuestBookDao();
+			
 			GuestBookVo guestBookVo = guestBookDao.getGuestBook(deleteNum);
 			
 			if(password.equals(guestBookVo.getPassword())){
