@@ -23,9 +23,10 @@
 			</h1>
 
 			<ul>
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-			</ul>
+				<li><%=userVo.getName() %> 님 안녕하세요^^</li>
+				<li><a href="./user?action=logout">로그아웃</a></li>
+				<li><a href="./user?action=modifyForm&uno=<%=userVo.getNo()%>">회원정보수정</a></li>
+	 		</ul>
 		</div>
 		<!-- //header -->
 
@@ -78,7 +79,7 @@
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">패스워드</label> 
-							<input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
+							<input type="text" id="input-pass" name="password" value="<%=userVo.getPassword()%>" placeholder="비밀번호를 입력하세요"	>
 						</div>
 
 						<!-- 이메일 -->

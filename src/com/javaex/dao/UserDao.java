@@ -121,13 +121,71 @@ public class UserDao {
 				uVo.setGender(rs.getString("gender"));
 			}
 		}catch(Exception e) {
-			System.out.println("getMember error: "+e);
+			System.out.println("getMember(String) error: "+e);
 		}
 		dbDisConnect();
 		return uVo;
 	}
 	
+	public UserVo getMember(int no) {
+		dbConnect();
+
+		UserVo uVo = new UserVo();
+		try {
+			String query="";
+			query+="select no, ";
+			query+=		  "id, ";
+			query+=		  "password, ";
+			query+=		  "name, ";
+			query+=		  "gender ";
+			query+="from users ";
+			query+="where no = ?";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				uVo.setNo(rs.getInt("no"));
+				uVo.setId(rs.getString("id"));
+				uVo.setPassword(rs.getString("password"));
+				uVo.setName(rs.getString("name"));
+				uVo.setGender(rs.getString("gender"));
+			}
+		}catch(Exception e) {
+			System.out.println("getMember(int) error: "+e);
+		}
+		dbDisConnect();
+		return uVo;
+	}
 	
+	public UserVo loginMember(String id, String password) {
+		dbConnect();
+
+		UserVo uVo = null;
+		try {
+			String query="";
+			query+="select no, ";
+			query+=		  "name ";
+			query+="from users ";
+			query+="where id = ? ";
+			query+="and password = ?";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int no = rs.getInt("no");
+				String name = rs.getString("name");
+				uVo = new UserVo(no,name);
+			}
+		}catch(Exception e) {
+			System.out.println("getMember error: "+e);
+		}
+		dbDisConnect();
+		return uVo;
+	}
 
 	
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="com.javaex.vo.UserVo" %>
+<%
+	UserVo authorVo = (UserVo)session.getAttribute("authorMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,18 +20,18 @@
 		<div id="header">
 			<h1><a href="">MySite</a></h1>
 			
-			 
-			<ul>
-				<li><a href="./user?action=loginForm">로그인</a></li>
-				<li><a href="./user?action=joinForm">회원가입</a></li>
-			</ul>
-			<!--
-			<ul>
-				<li>황일영 님 안녕하세요^^</li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">회원정보수정</a></li>
-			</ul>
-			-->
+			<%if(authorVo == null){ %>		 
+				<ul>
+					<li><a href="./user?action=loginForm">로그인</a></li>
+					<li><a href="./user?action=joinForm">회원가입</a></li>
+				</ul>
+			<%}else{ %>
+				<ul>
+					<li><%=authorVo.getName() %> 님 안녕하세요^^</li>
+					<li><a href="./user?action=logout">로그아웃</a></li>
+					<li><a href="./user?action=modifyForm">회원정보수정</a></li>
+				</ul>
+			<%} %>
 			
 		</div>
 		<!-- //header -->
