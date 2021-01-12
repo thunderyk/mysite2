@@ -55,8 +55,8 @@ public class GuestBookController extends HttpServlet {
 			
 			if(password.equals(guestBookVo.getPassword())){
 				guestBookDao.deleteGuestBook(deleteNum);
-				RequestDispatcher rd = request.getRequestDispatcher("./guest?action=addList");
-				rd.forward(request, response);
+				WebUtil.redirect(request, response, "./guest?action=addList");
+				
 			}else{
 				PrintWriter out = response.getWriter();
 				out.println("<script>"
