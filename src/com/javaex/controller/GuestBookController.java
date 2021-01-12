@@ -30,6 +30,7 @@ public class GuestBookController extends HttpServlet {
 			request.setAttribute("guestBookList", guestBookList);
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
+			
 		}else if("add".equals(action)){
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
@@ -40,11 +41,7 @@ public class GuestBookController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "./guest?action=addList");
 		}else if("deleteForm".equals(action)) {
-			int deleteNum = Integer.parseInt(request.getParameter("no"));
 			
-			GuestBookVo guestBookVo = guestBookDao.getGuestBook(deleteNum);
-			
-			request.setAttribute("guestBookVo", guestBookVo);
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
 		}else if("delete".equals(action)) {
 			
