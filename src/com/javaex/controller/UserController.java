@@ -52,11 +52,15 @@ public class UserController extends HttpServlet {
 				
 				WebUtil.forward(request, response, "./main");
 			}else {
+				/*
 				PrintWriter out = response.getWriter();
 				out.println("<script>"
 						+   "alert('아이디 혹은 비밀번호가 잘못 되었습니다.');"
 						+   "location.href='./user?action=loginForm';"
 						+   "</script>");
+				*/ //로그인 실패시 alert창 뜸
+				
+				WebUtil.redirect(request, response, "./user?action=loginForm&result=fail");
 			}
 		}else if("logout".equals(action)) {
 			HttpSession session = request.getSession();
