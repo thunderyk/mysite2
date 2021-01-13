@@ -84,7 +84,8 @@ public class UserController extends HttpServlet {
 			userDao.update(userVo);
 			
 			HttpSession session =request.getSession();
-			session.setAttribute("authorMember",userVo);
+			UserVo authorMember = userDao.loginMember(userVo.getId(),userVo.getPassword());
+			session.setAttribute("authorMember",authorMember);
 			
 			request.setAttribute("userVo", userVo);
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
