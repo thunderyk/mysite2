@@ -76,7 +76,7 @@ public class GuestBookDao {
 			query+=	"      name, "; 
 			query+=	"      password, "; 
 			query+=	"      content, "; 
-			query+="       reg_date "; 
+			query+="       TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date "; 
 			query+="from guestbook";
 			
 			pstmt = conn.prepareStatement(query);
@@ -88,7 +88,7 @@ public class GuestBookDao {
 				guestBookVo.setName(rs.getNString(2));
 				guestBookVo.setPassword(rs.getNString(3));
 				guestBookVo.setContent(rs.getNString(4));
-				guestBookVo.setDate(rs.getTimestamp(5));
+				guestBookVo.setDate(rs.getString(5));
 				guestBookList.add(guestBookVo);
 			}
 			
@@ -107,7 +107,7 @@ public class GuestBookDao {
 			query+=	"      name, "; 
 			query+=	"      password, "; 
 			query+=	"      content, "; 
-			query+="       reg_date "; 
+			query+="       TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date "; 
 			query+="from guestbook ";
 			query+="where no = ? ";
 			
@@ -120,7 +120,7 @@ public class GuestBookDao {
 				guestBookVo.setName(rs.getNString(2));
 				guestBookVo.setPassword(rs.getNString(3));
 				guestBookVo.setContent(rs.getNString(4));
-				guestBookVo.setDate(rs.getTimestamp(5));
+				guestBookVo.setDate(rs.getString(5));
 			}
 			
 		}catch(Exception e) {

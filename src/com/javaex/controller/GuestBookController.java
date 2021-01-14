@@ -47,7 +47,7 @@ public class GuestBookController extends HttpServlet {
 			
 			String password = request.getParameter("pass");
 			int deleteNum = Integer.parseInt(request.getParameter("no"));
-			
+			System.out.println(deleteNum);
 			GuestBookVo guestBookVo = guestBookDao.getGuestBook(deleteNum);
 			
 			if(password.equals(guestBookVo.getPassword())){

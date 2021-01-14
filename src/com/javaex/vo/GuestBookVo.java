@@ -8,7 +8,7 @@ public class GuestBookVo {
 	private String name;
 	private String password;
 	private String content;
-	private Timestamp date;
+	private String date;
 	
 	public GuestBookVo() {
 		
@@ -18,7 +18,7 @@ public class GuestBookVo {
 		this.password = password;
 		this.content = content;
 	}
-	public GuestBookVo(int no, String name, String password, String content, Timestamp date) {
+	public GuestBookVo(int no, String name, String password, String content, String date) {
 		this.no = no;
 		this.name = name;
 		this.password = password;
@@ -49,10 +49,10 @@ public class GuestBookVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Timestamp date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

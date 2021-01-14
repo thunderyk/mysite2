@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	int deleteNum = Integer.parseInt(request.getParameter("no"));
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +57,7 @@
 						</tr>
 					</table>
 					<input type='hidden' name="action" value="delete">
-					<input type='hidden' name="no" value=<%=deleteNum%>>
+					<input type='hidden' name="no" value="${param.no}">
 				</form>
 				
 			</div>

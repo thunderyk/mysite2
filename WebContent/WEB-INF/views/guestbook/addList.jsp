@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "com.javaex.vo.GuestBookVo" %>
-<%@ page import = "java.text.SimpleDateFormat" %>
-<%@ page import = "java.util.List" %>
-<% 
-	List<GuestBookVo>guestBookList = (List<GuestBookVo>)request.getAttribute("guestBookList");
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +69,9 @@
 					<input type="hidden" name="action" value="add">
 				</form>	
 				
-				<%for(int i=0;i<guestBookList.size();i++){ %>
+				<c:forEach items="${requestScope.guestBookList}" var="guestbookList">
+				
+				
 				<table class="guestRead">
 					<colgroup>
 						<col style="width: 10%;">
@@ -83,20 +80,19 @@
 						<col style="width: 10%;">
 					</colgroup>
 					<tr>
-						<td><%=guestBookList.get(i).getNo() %></td>
-						<td><%=guestBookList.get(i).getName() %></td>
-						<td><%=sdf.format(guestBookList.get(i).getDate())%></td>
-						<td><a href="./guest?action=deleteForm&no=<%=guestBookList.get(i).getNo()%>">[삭제]</a></td>
+						<td>${guestbookList.no}</td>
+						<td>${guestbookList.name}</td>
+						<td>${guestbookList.date}</td>
+						<td><a href="./guest?action=deleteForm&no=${guestbookList.no}">[삭제]</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left"><%=guestBookList.get(i).getContent() %></td>
+						<td colspan=4 class="text-left">${guestbookList.content}</td>
 					</tr>
 				</table>
-				<!-- //guestRead -->
-				<% } %>
+				</c:forEach>
 				
 			</div>
-			<!-- //guestbook -->
+
 		</div>
 		<!-- //content  -->
 		<div class="clear"></div>
