@@ -45,6 +45,14 @@
 				<div id="list">
 					<form action="./board?action=search" method="post">
 						<div class="form-group text-right">
+					    <select name="searchWay">
+                            <option selected="selected" value="board_title">제목</option>
+                            <option value="board_content">내용</option>
+                            <option value="board_titleContent">제목+내용</option>
+                            <option value="board_writer">글쓴이</option>
+                        </select>
+                    
+							
 							<input type="text" name="searchData" value="">
 							<button type="submit" id=btn_search>검색</button>
 						</div>

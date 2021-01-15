@@ -195,4 +195,68 @@ public class BoardDao {
 		
 		return boardList;
 	}
+	public List<BoardVo> getSearchBoardList(String searchWay, String searchData) {
+		List<BoardVo> boardList = new ArrayList<BoardVo>();
+		dbConnect();
+		try {
+				String query="";
+				query+="select b.no, "; 
+				query+=	"      title, "; 
+				query+=	"      name, "; 
+				query+=	"      hit, "; 
+				query+="       TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date, "; 
+				query+=	"      user_no ";
+				query+="from board b, users u ";
+				query+="where b.user_no = u.no ";
+				
+				if("board_title".equals(searchWay)) {
+					
+					query+="and title like ? ";
+					query+="order by b.no desc";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, "%"+searchData+"%");
+						
+				}else if("board_content".equals(searchWay)) {
+					
+					query+="and content like ? ";
+					query+="order by b.no desc";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, "%"+searchData+"%");
+					
+				}else if("board_titleContent".equals(searchWay)) {
+					
+					query+="and (title like ? ";
+					query+="or content like ?) ";
+					query+="order by b.no desc";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, "%"+searchData+"%");
+					pstmt.setString(2, "%"+searchData+"%");
+					
+				}else if("board_writer".equals(searchWay)) {
+					
+					query+="and name like ? ";
+					query+="order by b.no desc";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, "%"+searchData+"%");
+					
+				}
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					BoardVo boardVo = new BoardVo();
+					boardVo.setNo(rs.getInt(1));
+					boardVo.setTitle(rs.getString("title"));
+					boardVo.setName(rs.getString("name"));
+					boardVo.setHit(rs.getInt("hit"));
+					boardVo.setReg_date(rs.getString("reg_date"));
+					boardVo.setUser_no(rs.getInt("user_no"));
+					boardList.add(boardVo);
+				}
+		}catch(Exception e) {
+			System.out.println("getSearchBoardList: "+e);
+		}
+		dbDisConnect();
+		return boardList;
+	}
 }

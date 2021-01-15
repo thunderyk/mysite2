@@ -47,9 +47,10 @@ delete from users;
 select b.no, 
        title, 
        name,
+       content,
        hit, 
        TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date 
 from board b, users u
-where b.user_no = u.no;
+where b.user_no = u.no and (title like '%바보%' or ) order by no desc;
 
 select * from guestbook order by no asc;

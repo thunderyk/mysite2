@@ -69,7 +69,14 @@ public class BoardController extends HttpServlet {
 			boardDao.modifyBoard(boardVo);
 			WebUtil.redirect(request, response, "./board?action=list");
 		}else if("search".equals(action)) {
+			String searchWay = request.getParameter("searchWay");
+			String searchData = request.getParameter("searchData");
 			
+			
+			List<BoardVo> boardList = boardDao.getSearchBoardList(searchWay,searchData);
+			
+			request.setAttribute("boardList", boardList);
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
