@@ -66,7 +66,7 @@
 							<c:forEach items="${requestScope.boardList}" var="vo">
 								<tr>
 									<td>${vo.no}</td>
-									<td class="text-left"><a href="./board?action=read">${vo.title}</a></td>
+									<td class="text-left"><a href="./board?action=readBoard&readNum=${vo.no}">${vo.title}</a></td>
 									<td>${vo.name}</td>
 									<td>${vo.hit}</td>
 									<td>${vo.reg_date}</td>
@@ -100,8 +100,9 @@
 						
 						<div class="clear"></div>
 					</div>
-					<a id="btn_write" href="">글쓰기</a>
-				
+					<c:if test="${sessionScope.authorMember != null}">
+						<a id="btn_write" href="./board?action=wForm">글쓰기</a>
+					</c:if>
 				</div>
 				<!-- //list -->
 			</div>
