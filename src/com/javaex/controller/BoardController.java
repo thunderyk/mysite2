@@ -54,6 +54,22 @@ public class BoardController extends HttpServlet {
 			BoardVo boardVo = new BoardVo(title,content,userVo.getNo());
 			boardDao.insertBoard(boardVo);
 			WebUtil.redirect(request, response, "./board?action=list");
+		}else if("mForm".equals(action)) {
+			int modifyNum = Integer.parseInt(request.getParameter("modifyNum"));
+			BoardVo boardVo = boardDao.readBoard(modifyNum);
+			request.setAttribute("boardVo", boardVo);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
+		}else if("modifyBoard".equals(action)) {
+			String content = request.getParameter("content");
+			String title = request.getParameter("title");
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			BoardVo boardVo = new BoardVo(no, title, content);
+			boardDao.modifyBoard(boardVo);
+			WebUtil.redirect(request, response, "./board?action=list");
+		}else if("search".equals(action)) {
+			
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

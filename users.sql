@@ -51,3 +51,5 @@ select b.no,
        TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date 
 from board b, users u
 where b.user_no = u.no;
+
+select * from guestbook order by no asc;

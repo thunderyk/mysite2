@@ -104,6 +104,27 @@ public class BoardDao {
 		}
 		dbDisConnect();
 	}
+	public void modifyBoard(BoardVo boardVo) {
+		dbConnect();
+		try {
+			String query="";
+			query= "update board ";
+			query+= "set title =?, ";
+			query+= "	 content = ? ";
+			query+= "where no =?";
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1,boardVo.getTitle());
+			pstmt.setString(2,boardVo.getContent());
+			pstmt.setInt(3,boardVo.getNo());
+			
+			pstmt.executeQuery();
+			
+		}catch(Exception e) {
+			System.out.println("modifyBoard error: "+e);
+		}
+		dbDisConnect();
+	}
 	public void updateHit(int hit, int no) {
 		dbConnect();
 		try {
@@ -150,8 +171,8 @@ public class BoardDao {
 			query+="       TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date, "; 
 			query+=	"      user_no "; 
 			query+="from board b, users u ";
-			query+="where b.user_no = u.no";
-			
+			query+="where b.user_no = u.no ";
+			query+="order by b.no desc";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			

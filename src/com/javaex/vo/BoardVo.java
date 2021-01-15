@@ -25,6 +25,11 @@ public class BoardVo {
 		this.content = content;
 		this.user_no = user_no;
 	}
+	public BoardVo(int no, String title, String content) {
+		this.no = no;
+		this.title = title;
+		this.content = content;
+	}
 	
 	public int getNo() {
 		return no;
