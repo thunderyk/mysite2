@@ -37,7 +37,7 @@ insert into users
 values(seq_users_no.nextval,'aaa','123','김영관','male');
 
 insert into board
-values(seq_board_no.nextval,'하이','으아아아',0,sysdate,9);
+values(seq_board_no.nextval,'우아우이','으어아아',0,sysdate,9);
 
 select * from users;
 select * from board;
@@ -51,6 +51,6 @@ select b.no,
        hit, 
        TO_CHAR(reg_date,'YYYY-MM-DD HH:MM:SS') reg_date 
 from board b, users u
-where b.user_no = u.no and (title like '%바보%' or ) order by no desc;
+where b.user_no = u.no and (title like '' or content like '%모여라%') order by no desc;
 
 select * from guestbook order by no asc;

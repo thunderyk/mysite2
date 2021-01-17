@@ -57,9 +57,13 @@
 	margin: 0px 8px 0px 8px;
 }
 
-#board #list #paging ul>li.active{
-	font-size: 14px;
+#board #list #paging ul>li{
+	font-size: 16px;
+}
+#board #list #paging ul>li .active{
+	font-size: 16px;
 	font-weight: bold;
+	color: red;
 }
 
 /* 글쓰기 버튼 */
@@ -71,6 +75,7 @@
 	font-size: 14px;
 	float: right;
 }
+
 
 /****************************************************************/
 /* 게시판 글쓰기 ************************************************/
