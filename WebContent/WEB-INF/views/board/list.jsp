@@ -55,6 +55,7 @@
 				</c:otherwise>
 			</c:choose>
 			
+			<!-- 검색 제목으로 내용으로 제목+내용으로 글쓴이로 각각 따로 따로 검색 -->
 			<div id="board">
 				<div id="list">
 					<form action="./board?action=search" method="post">
@@ -105,7 +106,8 @@
 					<br>
 					<div id="paging">
 						<ul>
-							<c:choose><!-- 이전페이지 버튼 -->
+							<!-- 이전페이지 버튼 -->
+							<c:choose>
 								<c:when test="${currentPage == 1}"> <!-- 현재 페이지가 1페이지면 이전 페이지로 못감 -->
 									<li>◀</li>
 								</c:when>
@@ -126,7 +128,8 @@
 								</c:choose>
 							</c:forEach>
 							
-							<c:choose><!-- 다음 페이지로 가기 -->
+							<!-- 다음 페이지로 가기 -->
+							<c:choose> 
 								<c:when test="${currentPage == pageCount}"> <!-- 현재 페이지가 마지막 페이지면 다음 페이지로 못감 -->
 									<li>▶</li>
 								</c:when>
